@@ -56,6 +56,31 @@
                                     <outletCollection property="gestureRecognizers" destination="tgN-Xl-onj" appends="YES" id="mOa-cW-fRz"/>
                                 </connections>
                             </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3UX-5P-wmr">
+                                <rect key="frame" x="0.0" y="768" width="414" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="kart_2" translatesAutoresizingMaskIntoConstraints="NO" id="qDh-GP-vXA">
+                                        <rect key="frame" x="45" y="23" width="112" height="83"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="idm-Cq-1Ex">
+                                        <rect key="frame" x="180" y="0.0" width="54" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="kart_3" translatesAutoresizingMaskIntoConstraints="NO" id="ZeT-uI-hHT">
+                                        <rect key="frame" x="261" y="23" width="112" height="83"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="k5U-ns-Nm7" appends="YES" id="Hyx-a8-6bJ"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -64,6 +89,8 @@
                         <outlet property="KartView0" destination="eqo-jL-SBx" id="ReI-xY-aPr"/>
                         <outlet property="KartView1" destination="ViV-oP-oJY" id="5cS-wq-a1f"/>
                         <outlet property="KartView4" destination="BTS-Hd-UBH" id="By0-W6-HQi"/>
+                        <outlet property="arrow" destination="idm-Cq-1Ex" id="8jc-De-Bia"/>
+                        <outlet property="trayView" destination="3UX-5P-wmr" id="gUZ-lo-mgw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -132,14 +159,22 @@
                         <action selector="didLongPressBackground:" destination="BYZ-38-t0r" id="jpZ-yv-9YI"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="k5U-ns-Nm7">
+                    <connections>
+                        <action selector="didPanTray:" destination="BYZ-38-t0r" id="CmH-Zg-XgR"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="115.84821428571428"/>
         </scene>
     </scenes>
     <resources>
         <image name="background" width="320" height="568"/>
+        <image name="down_arrow" width="20" height="14"/>
         <image name="kart_0" width="340" height="340"/>
         <image name="kart_1" width="340" height="340"/>
+        <image name="kart_2" width="340" height="340"/>
+        <image name="kart_3" width="340" height="340"/>
         <image name="kart_4" width="340" height="340"/>
     </resources>
 </document>

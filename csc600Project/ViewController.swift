@@ -10,16 +10,73 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var trayOriginalCenter: CGPoint!
+    var trayDownOffset: CGFloat!
+    var trayUp: CGPoint!
+    var trayDown: CGPoint!
+    var newlyCreatedFace: UIImageView!
+    var newlyCreatedFaceOriginalCenter: CGPoint!
+
+    
+    @IBOutlet weak var trayView: UIView!
+    @IBOutlet weak var arrow: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        trayDownOffset = 105
+        trayUp = trayView.center
+        trayDown = CGPoint(x: trayView.center.x ,y: trayView.center.y + trayDownOffset)
         
         startingPointKartView1 = KartView1.center
         startingPointKartView0 = KartView0.center
         startingPointKartView4 = KartView4.center
         
     }
+    
 
+    @IBAction func didPanTray(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: view)
+            print("translation \(translation)")
+            let velocity = sender.velocity(in: view)
+            
+            if sender.state == .began {
+                trayOriginalCenter = trayView.center
+                print("Gesture began")
+                
+            } else if sender.state == .changed {
+                trayView.center = CGPoint(x: trayOriginalCenter.x, y: trayOriginalCenter.y + translation.y)
+                arrow.transform = CGAffineTransform(rotationAngle: CGFloat(180 * Double.pi / 180))
+                print("Gesture is changing")
+                
+            } else if sender.state == .ended {
+                if velocity.y > 0 {
+                    UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 1, options:[] , animations: { () -> Void in
+                        self.trayView.center = self.trayDown
+                    }, completion: nil)
+                } else {
+                    UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [], animations: { () -> Void in
+                        self.trayView.center = self.trayUp
+                        self.arrow.transform = CGAffineTransform(rotationAngle: CGFloat(0 * Double.pi / 180))
+                    }, completion: nil)
+                }
+                trayView.backgroundColor = getRandomColor()
+                print("Gesture ended")
+            }
+        }
+        
+        func getRandomColor() -> UIColor {
+            let randomRed:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
+            let randomGreen:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
+            let randomBlue:CGFloat = CGFloat(arc4random()) / CGFloat(UInt32.max)
+            return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
+        }
+    
+    
+
+    
+    
     @IBOutlet weak var KartView1: UIImageView!
     @IBOutlet weak var KartView0: UIImageView!
     @IBOutlet weak var KartView4: UIImageView!
