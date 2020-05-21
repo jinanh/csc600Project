@@ -74,7 +74,74 @@ class ViewController: UIViewController {
         }
     
     
+    @IBAction func didPanCart(_ sender: UIPanGestureRecognizer) {
+              let newGesture = UIPanGestureRecognizer(target: self, action: #selector(didPanFace2(_:)))
+              let translation = sender.translation(in: view)
+              
+              let deleteFace = UITapGestureRecognizer(target: self, action: #selector(noFace(_:)))
+              deleteFace.numberOfTapsRequired = 2
+              
+              if sender.state == .began {
+                  let imageView = sender.view as! UIImageView
+                  newlyCreatedFace = UIImageView(image: imageView.image)
+                  newlyCreatedFace.center = imageView.center
+                  view.addSubview(newlyCreatedFace)
+                  newlyCreatedFace.center = imageView.center
+                  newlyCreatedFace.center.y += trayView.frame.origin.y
+                  newlyCreatedFaceOriginalCenter = newlyCreatedFace.center
+                  newlyCreatedFace.isUserInteractionEnabled = true
+                  newlyCreatedFace.addGestureRecognizer(newGesture)
+                  newlyCreatedFace.addGestureRecognizer(deleteFace)
+                  UIView.animate(withDuration: 0.2, animations: {
+                    self.newlyCreatedFace.transform = CGAffineTransform(scaleX: 0.35, y: 0.35)
+                  })
+              } else if sender.state == .changed {
+                  newlyCreatedFace.center = CGPoint(x: newlyCreatedFaceOriginalCenter.x + translation.x, y: newlyCreatedFaceOriginalCenter.y + translation.y)
+                  
+              } else if sender.state == .ended {
+                  UIView.animate(withDuration: 0.4, animations: {
+                    self.newlyCreatedFace.transform = CGAffineTransform(scaleX: 0.35, y: 0.35)
+                  })
+                  if (newlyCreatedFace.frame.origin.y > trayView.frame.origin.y) {
+                      UIView.animate(withDuration: 0.5, animations: {
+                          self.newlyCreatedFace.center = self.newlyCreatedFaceOriginalCenter
+                      }, completion: { finished in
+                          if finished {
+                              self.newlyCreatedFace.removeFromSuperview()
+                          }
+                      })
+                  }
+                  
+              }
+          }
 
+        @objc func didPanFace2(_ sender: UIPanGestureRecognizer) {
+              
+              let translation = sender.translation(in: view)
+              
+              if sender.state == .began {
+                  newlyCreatedFace = sender.view as! UIImageView // to get the face that we panned on.
+                  newlyCreatedFaceOriginalCenter = newlyCreatedFace.center // so we can offset by translation later.
+              } else if sender.state == .changed {
+                  newlyCreatedFace.center = CGPoint(x: newlyCreatedFaceOriginalCenter.x + translation.x, y: newlyCreatedFaceOriginalCenter.y + translation.y)
+              } else if sender.state == .ended {
+                  if (newlyCreatedFace.frame.origin.y > trayView.frame.origin.y) {
+                      UIView.animate(withDuration: 2, animations: {
+                          self.newlyCreatedFace.transform = CGAffineTransform(scaleX: 0, y: 0)
+                      }, completion: { finished in
+                          if finished {
+                              self.newlyCreatedFace.removeFromSuperview()
+                          }
+                      })
+                  }
+                  
+              }
+          }
+          
+          @objc func noFace(_ sender: UIPanGestureRecognizer){
+              newlyCreatedFace.removeFromSuperview()
+          }
+    
     
     
     @IBOutlet weak var KartView1: UIImageView!

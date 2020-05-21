@@ -64,6 +64,9 @@
                                         <rect key="frame" x="45" y="23" width="112" height="83"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="c3Z-x4-99U" appends="YES" id="6tq-N3-ltT"/>
+                                        </connections>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="idm-Cq-1Ex">
                                         <rect key="frame" x="180" y="0.0" width="54" height="28"/>
@@ -73,6 +76,9 @@
                                         <rect key="frame" x="261" y="23" width="112" height="83"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="fui-2Z-81u" appends="YES" id="dAe-u2-J3t"/>
+                                        </connections>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -162,6 +168,16 @@
                 <panGestureRecognizer minimumNumberOfTouches="1" id="k5U-ns-Nm7">
                     <connections>
                         <action selector="didPanTray:" destination="BYZ-38-t0r" id="CmH-Zg-XgR"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="c3Z-x4-99U">
+                    <connections>
+                        <action selector="didPanCart:" destination="BYZ-38-t0r" id="pxR-kp-fTc"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="fui-2Z-81u">
+                    <connections>
+                        <action selector="didPanCart:" destination="BYZ-38-t0r" id="L5G-Hr-o3i"/>
                     </connections>
                 </panGestureRecognizer>
             </objects>
