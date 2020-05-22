@@ -8,4 +8,4 @@ the tray can be hidden by pulling down gesture, the tray will switch to random c
 new carts can be add by pulling out of the tray\
 new carts can be delete by double click
 
-Resources are origin by my codepath program, I use it and add more fetures to it
+Resources are origin by my codepath program, I use it and add more features to it
